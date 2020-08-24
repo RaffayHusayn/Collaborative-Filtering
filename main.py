@@ -18,11 +18,7 @@ set_session(sess)
 model = load_model('collab_trained_smaller.h5')
 
 
-
-
 app = Flask(__name__)
-
-
 
 #loading some data
 link = pd.read_csv('links_small.csv')[['movieId']]
@@ -57,23 +53,8 @@ def index():
         int_testuser = [int_testuser]#turn that variable into a python list
         np_testuser = np.array(int_testuser)#turn that list to numpy array
 
-        # #pre-processing the arrays
-        # np_link = link.to_numpy()
-        # flatten_np_link = np_link.flatten()
-        # np_link_tmdb = link_tmdb.to_numpy()
-        # flatten_np_link_tmdb = np_link_tmdb.flatten()
-        #
-        # #removing index to not give input above a range
-        # remove_index = np.argwhere(flatten_np_link >= 163949 )
-        # removed_np_link = np.delete(flatten_np_link, remove_index)
-        # removed_np_link_tmdb = np.delete(flatten_np_link_tmdb, remove_index)
-
-        #creating a repeated user array
         array_size = removed_np_link.size
         np_testuser_repeated = np.repeat(np_testuser, array_size)
-
-
-
 
         #making predictions
         rating = model.predict([np_testuser_repeated, removed_np_link] , batch_size=2)
