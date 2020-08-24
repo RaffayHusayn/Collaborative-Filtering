@@ -1,4 +1,3 @@
-
 from flask import Flask
 from flask import request
 from flask import jsonify
@@ -40,9 +39,9 @@ removed_np_link = np.delete(flatten_np_link, remove_index)
 removed_np_link_tmdb = np.delete(flatten_np_link_tmdb, remove_index)
 
 
-
-
-
+@app.route('/')
+def home():
+    return '<h1>Welcome to the HomePage!</h1>'
 
 
 @app.route('/prediciton', methods=["POST"])
